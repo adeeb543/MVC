@@ -49,5 +49,26 @@ namespace MvcTodoApp.Controllers
                 task.IsComplete = true;
             return RedirectToAction("Index");
         }
+        /// <summary>
+               /// ةمهملا ناونع ليدعت. 
+        /// </summary> 
+        /// <param name="id"> ةمهملا فرعم</param> 
+        /// <param name="newTitle">ديدجلا ناونعلا</param> 
+        [HttpPost] 
+        public IActionResult EditTask(int id, string newTitle) 
+        { 
+             // ابحث عن المهمة باستخدام المعرف
+            var task = tasks.FirstOrDefault(t => t.Id == id);
+            
+            // تأكد من أن المهمة موجودة وأن العنوان الجديد ليس فارغًا
+            if (task != null && !string.IsNullOrEmpty(newTitle))
+            {
+                task.Title = newTitle; // عدّل عنوان المهمة
+            }
+    
+  
+ 
+            return RedirectToAction("Index"); 
+        }
     }
 }
